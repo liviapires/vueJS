@@ -1,6 +1,14 @@
 <template>
-  <ExemplosDiretivas v-if="showHeader"/>
-  
+  <!-- <ExemplosDiretivas v-if="show"/> -->
+  <TheHeader>
+    
+    <template v-slot:description>
+      <h2>Descrição</h2>
+    </template>
+    
+    <h3>Conteúdo</h3>
+  </TheHeader>
+
   <br>
   
   <div v-if="accessLevel === 'admin'">Usuário Admin</div>
@@ -9,16 +17,18 @@
 </template>
 
 <script>
-import ExemplosDiretivas from './components/ExemplosDiretivas.vue'
+// import ExemplosDiretivas from './components/ExemplosDiretivas.vue'
+import TheHeader from './components/TheHeader.vue'
 
 export default {
   name: 'App',
   components: {
-    ExemplosDiretivas,
+    // ExemplosDiretivas,
+    TheHeader,
   },
   data() {
     return {
-      showHeader: true,
+      show: true,
       accessLevel: 'admin',
     }
   }

@@ -278,7 +278,7 @@
 
 <style>
     .title {
-        color: greenyellow;
+        color: rgb(130, 205, 17);
         padding: 0px;
     }
 
@@ -295,7 +295,7 @@
 
     .text-home{
         color: #000;
-        background-color: yellow
+        background-color: rgb(0, 162, 255);
     }
 
     .todos-items {
