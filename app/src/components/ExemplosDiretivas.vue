@@ -85,24 +85,41 @@
         </button>
     </div>
 
-    <div @mouseover="onMouseOver">
+    <div @mouseover="onMouseOver" @mouseout="onMouseOut">
             Olá
     </div>
 
     <div>
-        <div v-for="(obj, index) in todos" :key="obj.id" class="todos-items">
-            <img v-if="obj.img" :src="obj.img"/>
-            {{ index }} - {{ obj.title }}
+        <h1>To do's</h1>
+        <div v-for="(todo, index) in todos" :key="todo.id" class="todos-items">
+            <input type="checkbox" v-model="todo.completed"/>
+            <img v-if="todo.img" :src="todo.img"/>
+            {{ index }} - {{ todo.title }} <span>{{ "(" + todo.completed + ")"}}</span>
+        </div>
+
+        <h2>To do's em aberto</h2>
+        <div v-for="(todo, index) in uncompletedTodos" :key="todo.id" class="todos-items">
+            <img v-if="todo.img" :src="todo.img"/>
+            {{ index }} - {{ todo.title }} <span>{{ "(" + todo.completed + ")"}}</span>
+        </div>
+
+        <br>
+
+        <h2>To do's completas</h2>
+        <div v-for="(todo, index) in completedTodos" :key="todo.id" class="todos-items">
+            <img v-if="todo.img" :src="todo.img"/>
+            {{ index }} - {{ todo.title }} <span>{{ "(" + todo.completed + ")"}}</span>
         </div>
     </div>
 
     <div>
-        <form action="https://google.com" @submit="onSubmit">
+        <form action="https://google.com" v-on:submit="onSubmit">
             <button type="submit">
                 Enviar
             </button>
         </form>
     </div>
+
 </template>
 
 <script>
@@ -112,7 +129,7 @@
             return {
                 user: {
                     firstName: 'Livia',
-                    lastName: 'Pires',
+                    lastName: 'Di Onofre',
                 },
                 showName: true,
                 classVar: 'title',
@@ -129,32 +146,33 @@
                         "id": 1,
                         "title": "delectus aut autem",
                         "completed": false,
-                        "img": "https://via.placeholder.com/20"
+                        "img": "https://via.placeholder.com/20",
                     },
                     {
                         "userId": 1,
                         "id": 2,
                         "title": "quis ut nam facilis et officia qui",
-                        "completed": false
+                        "completed": false,
                     },
                     {
                         "userId": 1,
                         "id": 3,
                         "title": "fugiat veniam minus",
-                        "completed": false
+                        "completed": false,
                     },
                     {
                         "userId": 1,
                         "id": 4,
                         "title": "et porro tempora",
                         "completed": true,
-                        "img": "https://via.placeholder.com/20"
+                        "img": "https://via.placeholder.com/20",
                     },
                     {
                         "userId": 1,
                         "id": 5,
                         "title": "laboriosam mollitia et enim quasi adipisci quia provident illum",
-                        "completed": false
+                        "completed": true,
+                        "img": "https://via.placeholder.com/20",
                     }
                 ]
 
@@ -168,6 +186,9 @@
             onMouseOver(){
                 console.log("Olá");
             },
+            onMouseOut(){
+                console.log("Tchau");
+            },
             onSubmit(){
                 console.log("Submit");
             },
@@ -176,6 +197,12 @@
         computed: {
             fullName(){
                 return `${this.user.firstName} ${this.user.lastName}`
+            },
+            uncompletedTodos(){
+                return this.todos.filter(todo => !todo.completed)
+            },
+            completedTodos(){
+                return this.todos.filter(todo => todo.completed)
             },
         },
     }
