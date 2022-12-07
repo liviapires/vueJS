@@ -248,6 +248,31 @@
                 return this.todos.filter(todo => todo.completed)
             },
         },
+
+        beforeCreate(){
+            console.log('beforeCreate');
+        },
+
+        created(){
+            console.log('created');
+        },
+
+        beforeMount(){
+            console.log('beforeMount');
+        },
+
+        mounted(){
+            console.log('mounted');
+        },
+        
+        beforeDemount(){
+            console.log('beforeDemount');
+        },
+            
+
+        unmounted(){ 
+            console.log('unmounted');
+        },
     }
 </script>
 
