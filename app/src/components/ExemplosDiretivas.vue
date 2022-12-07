@@ -18,8 +18,7 @@
             <label>Nome: </label>
             <input v-model="name" type="text"/>
 
-            <br>
-            <br>
+            <br><br>
 
             {{ name }}
         </div>
@@ -120,6 +119,24 @@
         </form>
     </div>
 
+    <div>
+        <select v-model="pageCount">
+            <option value="5">5</option>
+            <option value="10">10</option>
+            <option value="15">15</option>
+        </select>
+        <br><br>
+        {{ pageCount + " Páginas"}}
+    </div>
+
+    <div>
+        <input v-model="user.firstName" type="text"/>
+        <br><br>
+        <input v-model="user.lastName" type="text"/>
+        <br><br>
+        {{ user.firstName }} {{ user.lastName }}
+    </div>
+
 </template>
 
 <script>
@@ -135,11 +152,12 @@
                 classVar: 'title',
                 isHome: true,
                 pClass: ['text', 'text-home'],
-                name: "Oi",
+                name: "Liv",
                 sports: "",
                 opcao: "",
                 checkbox: true,
                 colors: [],
+                pageCount: 5,
                 todos: [
                     {
                         "userId": 1,
@@ -173,10 +191,27 @@
                         "title": "laboriosam mollitia et enim quasi adipisci quia provident illum",
                         "completed": true,
                         "img": "https://via.placeholder.com/20",
-                    }
+                    },
                 ]
 
             }
+        },
+
+        watch:{
+            name(vl){
+                if(vl.length >= 3){
+                    this.saveUserName();
+                }
+            },
+            pageCount(){
+                this.changePage();
+            },
+            user: {
+                handler(){
+                    console.log('user changed');
+                },
+                deep: true,
+            },
         },
 
         methods: {
@@ -191,6 +226,14 @@
             },
             onSubmit(){
                 console.log("Submit");
+            },
+            saveUserName(){
+                console.log('Ajax');
+                console.log(this.name);
+            },
+            changePage(){
+                console.log('Ajax');
+                console.log(this.pageCount);
             },
         },
 
