@@ -7,18 +7,44 @@ export default createStore({
       last_name: 'Pires',
       email:'liv@pires.com',
     },
-    products:[]
+    products:[
+      {
+        id: 1,
+        name: 'Patins',
+        price: 10,
+      },
+      {
+        id: 2,
+        name: 'Bicicleta',
+        price: 100,
+      },
+      {
+        id: 3,
+        name: 'Carro',
+        price: 1000,
+      },
+    ],
+    cart: [],
   },
 
   mutations: {
-    storeUser(state){
-      console.log(state);
-    }
-  },
+    storeUser(state, data){
+      state.user = data
+    },
 
-  actions: {
+    addToCart(state, data){
+      state.cart.push(data)
+    },
+
+    removeFromCart(state, id){
+      const index = state.cart.findIndex(obj => obj.id === id)
+      state.cart.splice(index, 1)
+    }
   },
   
   getters: {
+  },
+
+  actions: {
   },
 })

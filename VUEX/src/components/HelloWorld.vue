@@ -1,6 +1,14 @@
 <template>
   <div class="hello">
     <h1>{{ msg }}</h1>
+
+    <div class="bg">
+      {{ $store.state.user.first_name }} {{ $store.state.user.last_name }}
+      <br>
+      {{ $store.state.user.email }}
+      <br>
+    </div>
+
     <p>
       For a guide and recipes on how to configure / customize this project,<br>
       check out the
@@ -54,5 +62,11 @@ li {
 }
 a {
   color: #42b983;
+}
+.bg {
+  background-color: #42b983;
+  border: 1px solid #35495E;
+  width: 150px;
+  margin: auto;
 }
 </style>

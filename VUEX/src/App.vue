@@ -1,15 +1,20 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  
+  <button @click="updateUser()">
+    Atualizar usuário
+  </button>
+  <br><br>
+  <AppProducts />
+
 </template>
 
 <script>
-  import HelloWorld from './components/HelloWorld.vue'
+import AppProducts from './components/Products/AppProducts.vue'
 
   export default {
     name: 'App',
     components: {
-      HelloWorld
+      AppProducts,
     },
 
     data(){
@@ -18,8 +23,15 @@
       }
     },
 
-    created() {
-      console.log(this.$store.commit('storeUser'));
+    methods: {
+      updateUser(){
+        const newUser = {
+          first_name: 'John',
+          last_name: 'Lenon',
+          email:'a@b.com',
+        }
+        this.$store.commit('storeUser', newUser);
+      }
     }
   }
 </script>
