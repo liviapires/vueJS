@@ -11,7 +11,7 @@ export default createStore({
       {
         id: 1,
         name: 'Patins',
-        price: 10,
+        price: 20,
       },
       {
         id: 2,
@@ -21,7 +21,7 @@ export default createStore({
       {
         id: 3,
         name: 'Carro',
-        price: 1000,
+        price: 3000,
       },
     ],
     cart: [],
@@ -43,8 +43,20 @@ export default createStore({
   },
   
   getters: {
+    total(state){
+      return state.cart.reduce((totalAcumulado, item) => totalAcumulado += item.price, 0)
+    }
   },
 
   actions: {
+    storeUser({commit}, data){
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          commit('storeUser', data)
+          resolve()
+          console.log('Dados do usuário armazenados com sucesso!')
+        }, 3000)
+      })
+    }
   },
 })

@@ -1,10 +1,16 @@
 <template>
+  {{ $store.state.user.first_name }} {{ $store.state.user.last_name }}
+  <br>
+  {{ $store.state.user.email }}
+
+  <br><br>
   
   <button @click="updateUser()">
     Atualizar usuário
   </button>
   <br><br>
   <AppProducts />
+  {{ $store.getters.total }}
 
 </template>
 
@@ -30,7 +36,10 @@ import AppProducts from './components/Products/AppProducts.vue'
           last_name: 'Lenon',
           email:'a@b.com',
         }
-        this.$store.commit('storeUser', newUser);
+        // this.$store.commit('storeUser', newUser);
+        this.$store.dispatch('storeUser', newUser).then(() => {
+          console.log('Usuário atualizado com sucesso!')
+        });
       }
     }
   }
