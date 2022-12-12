@@ -1,9 +1,15 @@
 <template>
+  <AppHook v-if="showAppHook"/>
+
+  <br><br>
+
+  <button @click="showAppHook = !showAppHook">
+    Toggle AppHook
+  </button>
+  
+  <br><br>
+
   <img @click="changeName()" alt="Vue logo" src="./assets/logo.png">
-
-  <br>
-
-  {{ name }}
 
   <br><br>
 
@@ -12,45 +18,66 @@
 
   <br><br>
 
-  <h4>Admin</h4>
-  {{ admin.first_name }} {{ admin.last_name }}
+  <h4>Computed</h4>
+  {{ fullName }}
+
+  <br><br>
+
+  <AppButton data-vue="Jon" @update="getUpdate">
+    Save
+    <template #icon>
+      Icon
+    </template>
+  </AppButton>
 
 </template>
 
 <script>
-import { ref, reactive } from 'vue';
+import { ref, computed, watch} from 'vue';
+import AppHook from './components/AppHook.vue';
+import AppButton from './components/AppButton.vue';
 
 export default {
   name: 'App',
   components: {
+    AppHook,
+    AppButton,
   },
 
   setup() {
-    let name = 'Liv';
-    
-    const user = reactive({
+    const getUpdate = (data) => {
+      console.log('update', data)
+    }
+
+    const showAppHook = ref(true);
+
+    const user = ref({
       first_name: 'Livia',
       last_name: 'Pires'
     })
 
-    const admin = ref({
-      first_name: 'Admin',
-      last_name: 'Master'
+    const fullName = computed(() => {
+      return `${user.value.first_name} ${user.value.last_name}`;
+    })
+
+    watch(user,() =>{
+      console.log('user changed')
+    }, {
+      deep: true
     })
 
     const changeName = () => {
-      alert('change name');
-      name = 'John';
+      alert('change name')
 
-      user.first_name = 'Flávia';
-      admin.value.last_name = 'Master Blaster';
+      user.value.first_name = 'Flávia';
     }
     
     return {
-      name,
       user,
-      admin,
+      fullName,
       changeName,
+      showAppHook,
+      getUpdate,
     }
   }
 }
