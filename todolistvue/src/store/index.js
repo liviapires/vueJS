@@ -28,6 +28,10 @@ export default createStore({
             .then(response => {
                 commit('storeToDo', response.data);
             })
+        },
+
+        updateToDo(context, { id, data }){
+            axios.put(`http://localhost:3000/todos/${id}`, data)
         }
     },
 
